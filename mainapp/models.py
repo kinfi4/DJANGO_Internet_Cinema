@@ -1,6 +1,10 @@
 from django.db import models
 
 
+class FilmManager:
+    pass
+
+
 class Film(models.Model):
     title = models.CharField(max_length=255, verbose_name='Film Title')
     image = models.ImageField(verbose_name='Image')
@@ -13,8 +17,14 @@ class Film(models.Model):
     rating = models.CharField(max_length=10)
     lasting = models.CharField(max_length=10)
 
+    Country = models.ManyToManyField('Country', verbose_name='Country', blank=True, null=True)
+    Category = models.ManyToManyField('Category', verbose_name='Category', blank=True, null=True)
+
     def __str__(self):
         return self.title
+
+    def get_film_url(self):
+        return f'films/{self.slug}/'
 
 
 class Category(models.Model):
@@ -24,6 +34,9 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_category_url(self):
+        return f'genre/{self.name}/'
 
 
 class Actor(models.Model):
@@ -43,4 +56,7 @@ class Country(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_category_url(self):
+        return f'country/{self.name}/'
 
