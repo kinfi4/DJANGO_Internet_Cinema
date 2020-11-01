@@ -17,8 +17,10 @@ class Film(models.Model):
     rating = models.CharField(max_length=10)
     lasting = models.CharField(max_length=10)
 
-    Country = models.ManyToManyField('Country', verbose_name='Country', blank=True, null=True)
-    Category = models.ManyToManyField('Category', verbose_name='Category', blank=True, null=True)
+    countries = models.ManyToManyField('Country', verbose_name='Country', blank=True, null=True)
+    categories = models.ManyToManyField('Category', verbose_name='Category', blank=True, null=True)
+
+    constraints = models.CharField(max_length=10, verbose_name='Constraints', null=True, blank=True)
 
     def __str__(self):
         return self.title
@@ -41,6 +43,7 @@ class Category(models.Model):
 
 class Actor(models.Model):
     films = models.ManyToManyField('Film', verbose_name='Films', blank=True, null=True)
+
     biography = models.TextField(max_length=1000, verbose_name='Actor biography', null=True, blank=True)
     country = models.CharField(max_length=100, verbose_name='Actor country')
     first_name = models.CharField(max_length=255, default='Max')
