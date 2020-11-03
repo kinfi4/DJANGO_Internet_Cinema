@@ -14,13 +14,18 @@ class Film(models.Model):
     full_hd = models.BooleanField(default=True)
     actors = models.ManyToManyField('Actor', verbose_name='Actors', null=True, blank=True)
     year = models.CharField(max_length=10)
-    rating = models.CharField(max_length=10)
+    rating = models.FloatField(default=0)
     lasting = models.CharField(max_length=10)
 
     countries = models.ManyToManyField('Country', verbose_name='Country', blank=True, null=True)
     categories = models.ManyToManyField('Category', verbose_name='Category', blank=True, null=True)
 
     constraints = models.CharField(max_length=10, verbose_name='Constraints', null=True, blank=True)
+
+    views = models.PositiveIntegerField(default=0)
+    comments = models.PositiveIntegerField(default=0)
+
+    is_released = models.BooleanField(default=True)
 
     def __str__(self):
         return self.title
@@ -60,6 +65,6 @@ class Country(models.Model):
     def __str__(self):
         return self.name
 
-    def get_category_url(self):
+    def get_country_url(self):
         return f'country/{self.name}/'
 

@@ -47,7 +47,7 @@
 					<div class="col-12">
 						<div class="header__content">
 							<!-- header logo -->
-							<a href="index.html" >
+							<a href="/" >
 								<img src="{% static 'img/logo.png'%}" alt="Logo" height="70px" width="250px" class="logoImg">
 							</a>
 							<!-- end header logo -->
@@ -99,10 +99,12 @@
 	</header>
 	<!-- end header -->
 
+	{% block content %}
+
 	<!-- home -->
 	<section class="home">
 
-		<div class="container">
+		<div class="container" id="tab-1">
 			<div class="row">
 				<div class="col-12">
 					<h1 class="home__title"><b>NEW ITEMS</b> OF THIS SEASON</h1>
@@ -141,15 +143,14 @@
 		</div>
 	</div>
 
-	{% block content %}
 	<div class="container">
 		<!-- content tabs -->
 		<section class="tab-content" id="myTabContent">
-			<div class="tab-pane fade show active" id="tab-1" role="tabpanel" aria-labelledby="1-tab">
+			<div class="tab-pane fade show active" role="tabpanel" aria-labelledby="1-tab">
 				<div class="row">
 
 					<!--first row of films -->
-					{% for film in films %}
+					{% for film in films_new_release %}
 					<!-- cards -->
 					<div class="col-12 col-sm-12 col-lg-6 ">
 						<div class="card card--list">
@@ -179,7 +180,7 @@
 												{% if film.full_hd %}
 												<li>HD</li>
 												{% endif %}
-												<li>16+</li>
+												<li>{{ film.constraints }}+</li>
 											</ul>
 										</div>
 									</div>
@@ -194,73 +195,91 @@
 			</div>
 		</section>
 	</div>
+
+
+	<section class="home">
+		<div class="container">
+			<div class="row" id="tab-2">
+				<div class="col-12">
+					<h1 class="home__title"><b>TOP RATING</b> OF THIS SEASON</h1>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<div class="container">
+		<!-- content tabs -->
+		<section class="tab-content">
+			<div class="tab-pane fade show active" role="tabpanel" aria-labelledby="1-tab">
+				<div class="row">
+
+					<!--first row of films -->
+					{% for film in films_top_rating %}
+					<!-- cards -->
+					<div class="col-12 col-sm-12 col-lg-6 ">
+						<div class="card card--list">
+							<div class="row">
+								<div class="col-12 col-sm-4">
+									<div class="card__cover">
+										<img src="{{ film.image.url }}" alt="">
+										<a href="{{ film.get_film_url }}" class="card__play">
+											<i class="icon ion-ios-play"></i>
+										</a>
+									</div>
+								</div>
+								<!--  -->
+								<div class="col-12 col-sm-5">
+									<div class="card__content">
+										<h3><a href="{{ film.get_film_url }}" class="film-title">{{ film.title }}</a></h3>
+										<span class="card__category">
+												{% for category in film.categories.all %}
+													<a href="/">{{ category }}</a>
+												{% endfor %}
+											</span>
+
+										<div class="card__wrap">
+											<span class="card__rate"><i class="icon ion-ios-star"></i>{{ film.rating }}</span>
+
+											<ul class="card__list">
+												{% if film.full_hd %}
+												<li>HD</li>
+												{% endif %}
+												<li>{{ film.constraints }}+</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- end cards -->
+					{% endfor %}
+
+				</div>
+			</div>
+		</section>
+	</div>
+
+
+
+
+
+
+
 	{% endblock content%}
-
-
 	<!-- footer -->
 	<footer class="footer">
 		<div class="container">
 			<div class="row">
 				<!-- footer list -->
-				<div class="col-12 col-md-3">
-					<h6 class="footer__title">Download Our App</h6>
-					<ul class="footer__app">
-						<li><a href="#"><img src="img/Download_on_the_App_Store_Badge.svg" alt=""></a></li>
-						<li><a href="#"><img src="img/google-play-badge.png" alt=""></a></li>
-					</ul>
-				</div>
-				<!-- end footer list -->
-
-				<!-- footer list -->
-				<div class="col-6 col-sm-4 col-md-3">
-					<h6 class="footer__title">Resources</h6>
-					<ul class="footer__list">
-						<li><a href="#">About Us</a></li>
-						<li><a href="#">Pricing Plan</a></li>
-						<li><a href="#">Help</a></li>
-					</ul>
-				</div>
-				<!-- end footer list -->
-
-				<!-- footer list -->
-				<div class="col-6 col-sm-4 col-md-3">
-					<h6 class="footer__title">Legal</h6>
-					<ul class="footer__list">
-						<li><a href="#">Terms of Use</a></li>
-						<li><a href="#">Privacy Policy</a></li>
-						<li><a href="#">Security</a></li>
-					</ul>
-				</div>
-				<!-- end footer list -->
-
-				<!-- footer list -->
 				<div class="col-12 col-sm-4 col-md-3">
 					<h6 class="footer__title">Contact</h6>
 					<ul class="footer__list">
-						<li><a href="tel:+18002345678">+1 (800) 234-5678</a></li>
-						<li><a href="mailto:support@moviego.com">support@flixgo.com</a></li>
-					</ul>
-					<ul class="footer__social">
-						<li class="facebook"><a href="#"><i class="icon ion-logo-facebook"></i></a></li>
-						<li class="instagram"><a href="#"><i class="icon ion-logo-instagram"></i></a></li>
-						<li class="twitter"><a href="#"><i class="icon ion-logo-twitter"></i></a></li>
-						<li class="vk"><a href="#"><i class="icon ion-logo-vk"></i></a></li>
+						<li><a href="/">+38(050) 84-33-996</a></li>
+						<li><a href="/">ilyamakarov223@gmail.com</a></li>
 					</ul>
 				</div>
 				<!-- end footer list -->
-
-				<!-- footer copyright -->
-				<div class="col-12">
-					<div class="footer__copyright">
-						<small><a target="_blank" href="https://www.templateshub.net">Templates Hub</a></small>
-
-						<ul>
-							<li><a href="#">Terms of Use</a></li>
-							<li><a href="#">Privacy Policy</a></li>
-						</ul>
-					</div>
-				</div>
-				<!-- end footer copyright -->
 			</div>
 		</div>
 	</footer>
