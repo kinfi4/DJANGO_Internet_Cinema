@@ -1,1 +1,35 @@
-{% expends 'base.html '%}
+{% extends 'base.html '%}
+{% load static %}
+
+{% block content %}
+    <!-- page title -->
+	<section class="section section--first section--bg" data-bg="{% static 'img/home__bg.jpg' %}">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<div class="section__wrap">
+						<!-- section title -->
+						<h2 class="section__title">Catalog</h2>
+						<!-- end section title -->
+
+						<!-- breadcrumb -->
+						<ul class="breadcrumb">
+							<li class="breadcrumb__item"><a href="/">Home</a></li>
+							<li class="breadcrumb__item breadcrumb__item--active">Catalog list</li>
+						</ul>
+						<!-- end breadcrumb -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- end page title -->
+
+<!--    <section class="filter">-->
+<!--        <div class="container">-->
+<!--            -->
+<!--        </div>-->
+<!--    </section>-->
+
+
+{% endblock content%}

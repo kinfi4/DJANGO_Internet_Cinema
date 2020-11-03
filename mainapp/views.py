@@ -28,6 +28,7 @@ class FilmView(View):
         context = {
             'film': Film.objects.get(slug=slug)
         }
+
         return context
 
 
@@ -36,4 +37,18 @@ class CatalogView(View):
         return render(request, 'catalog.html', self.prepare_context())
 
     def prepare_context(self):
-        pass
+        categories = Category.objects.all()
+
+        context = {
+            'categories': categories
+        }
+
+        return context
+
+
+class HelpView(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'help.html', self.prepare_context())
+
+    def prepare_context(self):
+        return {}
