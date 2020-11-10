@@ -67,4 +67,3 @@ class Country(models.Model):
 
     def get_country_url(self):
         return f'country/{self.name}/'
-

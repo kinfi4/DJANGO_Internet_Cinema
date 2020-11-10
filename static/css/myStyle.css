@@ -28,3 +28,53 @@ input[type="text"]:focus {
   font-weight: bold;
 }
 
+
+/* filter  */
+
+.filter-container{
+  height: 100px;
+  margin-top: 15px;
+  clear:both; text-align:right;
+  
+}
+
+.apply-button{
+  color: azure;
+  float: right;
+  position: relative;
+  bottom: 70px;
+  border: beige 1px solid;
+  padding: 15px;
+}
+
+.apply-button:hover{
+  color: black;
+  background-color: beige;
+  float: right;
+  position: relative;
+  bottom: 70px;
+  border: beige 1px solid;
+  padding: 15px;
+}
+
+
+label.label-for-filter{
+  color: aquamarine;
+  margin-top: 10px;
+  font-size: 20px;
+  display: inline;
+}
+
+.select-filter{
+  width: 100px;
+  background-color: rgb(51, 50, 50);
+  border: none;
+  color: azure;
+  height: 30px;
+  border-radius: 4px;
+}
+
+
+.filter-block{
+  margin-top: 10px;
+}

@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views import View
 
-from .models import Film, Category
+from .models import Film, Category, Country
 
 
 class BaseView(View):
@@ -38,9 +38,11 @@ class CatalogView(View):
 
     def prepare_context(self):
         categories = Category.objects.all()
+        countries = Country.objects.all()
 
         context = {
-            'categories': categories
+            'categories': categories,
+            'countries': countries
         }
 
         return context

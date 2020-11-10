@@ -25,11 +25,35 @@
 	</section>
 	<!-- end page title -->
 
-<!--    <section class="filter">-->
-<!--        <div class="container">-->
-<!--            -->
-<!--        </div>-->
-<!--    </section>-->
+   <section class="filter">
+       <div class="container filter-container">
+		   <form action="POST">
+			   <div class="filter-content">
+				<div class="filter-block">
+					<label for="genre" class="label-for-filter">Genre</label>
+					<select name="genre" id="genre" class="select-filter">
+						{% for category in categories %}
+							<option value="">{{ category }}</option>
+						{% endfor %}
+					</select> 
+			   </div>
+
+				<div class="filter-block">
+					<label for="country" class="label-for-filter">Country</label>
+					<select name="country" id="country" class="select-filter">
+						{% for country in countries %}
+							<option value="">{{ country }}</option>
+						{% endfor %}
+					</select>
+				</div>
+			   </div>
+
+			   
+			   			   
+			   <!-- <button type="submit" value="APPLY FILTER" class="apply-button">APPLY FILTER</button> -->
+		   </form>
+       </div>
+   </section>
 
 
 {% endblock content%}
