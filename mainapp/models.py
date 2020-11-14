@@ -1,10 +1,6 @@
 from django.db import models
 
 
-class FilmManager:
-    pass
-
-
 class Film(models.Model):
     title = models.CharField(max_length=255, verbose_name='Film Title')
     image = models.ImageField(verbose_name='Image')
@@ -15,7 +11,7 @@ class Film(models.Model):
     actors = models.ManyToManyField('Actor', verbose_name='Actors', null=True, blank=True)
     year = models.CharField(max_length=10)
     rating = models.FloatField(default=0)
-    lasting = models.CharField(max_length=10)
+    lasting = models.CharField(max_length=30)
 
     countries = models.ManyToManyField('Country', verbose_name='Country', blank=True, null=True)
     categories = models.ManyToManyField('Category', verbose_name='Category', blank=True, null=True)
@@ -31,7 +27,7 @@ class Film(models.Model):
         return self.title
 
     def get_film_url(self):
-        return f'films/{self.slug}/'
+        return f'/films/{self.slug}/'
 
 
 class Category(models.Model):
@@ -43,7 +39,7 @@ class Category(models.Model):
         return self.name
 
     def get_category_url(self):
-        return f'genre/{self.name}/'
+        return f'/catalog?category={self.name}'
 
 
 class Actor(models.Model):
@@ -60,10 +56,11 @@ class Actor(models.Model):
 
 class Country(models.Model):
     name = models.CharField(max_length=255)
+    slug = models.SlugField(unique=True, verbose_name='Country slug', default='1')
     films = models.ManyToManyField('Film', verbose_name='Films', blank=True, null=True)
 
     def __str__(self):
         return self.name
 
     def get_country_url(self):
-        return f'country/{self.name}/'
+        return f'/catalog?country={self.name}'

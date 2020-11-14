@@ -28,6 +28,14 @@ input[type="text"]:focus {
   font-weight: bold;
 }
 
+film__country{
+  font-size: large;
+  color: red;
+}
+
+.video-player{
+  margin-bottom: 100px;
+}
 
 /* filter  */
 
@@ -40,20 +48,20 @@ input[type="text"]:focus {
 
 .apply-button{
   color: azure;
-  float: right;
+  float: left;
   position: relative;
-  bottom: 70px;
   border: beige 1px solid;
+  border-radius: 3px;
   padding: 15px;
 }
 
 .apply-button:hover{
   color: black;
   background-color: beige;
-  float: right;
+  float: left;
   position: relative;
-  bottom: 70px;
   border: beige 1px solid;
+  border-radius: 3px;
   padding: 15px;
 }
 
@@ -63,6 +71,7 @@ label.label-for-filter{
   margin-top: 10px;
   font-size: 20px;
   display: inline;
+  margin-right: 5px;
 }
 
 .select-filter{

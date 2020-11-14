@@ -1,0 +1,23 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'css/film_creation_styles.css' %}" type="text/css">
+
+</head>
+<body>
+<div class="film-creation-form-block">
+    <h1 class="title">Enter film url</h1>
+    <form action="/film_creation/" method="POST">
+        {% csrf_token %}
+
+        <div class="film-creation-form-content">
+            <input type="text" name="url" class="film-creation-form-input"> <br>
+            <input type="submit" value="Add film">
+        </div>
+    </form>
+</div>
+</body>
+</html>

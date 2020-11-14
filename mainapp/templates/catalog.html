@@ -27,8 +27,10 @@
 
    <section class="filter">
        <div class="container filter-container">
-		   <form action="POST">
+		   <form action="catalog/" method="POST">
 			   <div class="filter-content">
+			   <button type="submit" value="APPLY FILTER" class="apply-button">APPLY FILTER</button>
+
 				<div class="filter-block">
 					<label for="genre" class="label-for-filter">Genre</label>
 					<select name="genre" id="genre" class="select-filter">
@@ -50,10 +52,70 @@
 
 			   
 			   			   
-			   <!-- <button type="submit" value="APPLY FILTER" class="apply-button">APPLY FILTER</button> -->
 		   </form>
        </div>
    </section>
+
+
+   <div class="container">
+	<!-- content tabs -->
+	<section class="tab-content">
+		<div class="tab-pane fade show active" role="tabpanel" aria-labelledby="1-tab">
+			<div class="row">
+
+				<!--first row of films. -->
+				{% for film in films %}
+				<!-- cards -->
+				<div class="col-12 col-sm-12 col-lg-6 ">
+					<div class="card card--list">
+						<div class="row">
+							<div class="col-12 col-sm-4">
+								<div class="card__cover">
+									<img src="{{ film.image.url }}" alt="">
+									<a href="{{ film.get_film_url }}" class="card__play">
+										<i class="icon ion-ios-play"></i>
+									</a>
+								</div>
+							</div>
+							<!--  -->
+							<div class="col-12 col-sm-5">
+								<div class="card__content">
+									<h3><a href="{{ film.get_film_url }}" class="film-title">{{ film.title }}</a></h3>
+									<span class="card__category film__country">
+										{% for country in film.countries.all %}
+											<a href="{{ country.get_country_url }}">{{ country.name.capitalize }}</a>
+										{% endfor %}
+									</span>
+									<span class="card__category">
+											{% for category in film.categories.all %}
+												<a href="{{ category.get_category_url }}">{{ category }}</a>
+											{% endfor %}
+										</span>
+
+									<div class="card__wrap">
+										<span class="card__rate"><i class="icon ion-ios-star"></i>{{ film.rating }}</span>
+
+										<ul class="card__list">
+											{% if film.full_hd %}
+											<li>HD</li>
+											{% endif %}
+											<li>{{ film.constraints }}+</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- end cards -->
+				{% endfor %}
+
+			</div>
+		</div>
+	</section>
+</div>
+
+
 
 
 {% endblock content%}

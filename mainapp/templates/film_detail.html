@@ -35,7 +35,7 @@
                                             {% if film.full_hd %}
 											<li>HD</li>
                                             {% endif %}
-											<li>{{ film.constraints }}+</li>
+											<li>{{ film.constraints }}</li>
 										</ul>
 									</div>
 
@@ -54,9 +54,9 @@
 											{% endfor %}
 										</li>
 									</ul>
-
+									<br>
 									<div style="color: rgb(226, 208, 208);">
-										{{ film.description }}
+										Description: <br> {{ film.description }}
 									</div>
 								</div>
 							</div>
@@ -70,7 +70,7 @@
 	</section>
 	
 	<!-- player -->
-	<div class="col-12 col-xl-12" style="align-content: center;">
+	<div class="col-12 col-xl-12 video-player" style="align-content: center;">
 		<video controls crossorigin playsinline id="player" style="margin-left: 200px;">
 			<!-- Video files -->
 			<source src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4" type="video/mp4" size="576">

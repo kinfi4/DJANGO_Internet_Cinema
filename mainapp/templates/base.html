@@ -19,6 +19,7 @@
 
 	<link rel="stylesheet" href="{% static 'css/myStyle.css' %}" type="text/css">
 
+
 	<style>
 		.film-title{
 		color: #fff;
@@ -167,11 +168,16 @@
 								<div class="col-12 col-sm-5">
 									<div class="card__content">
 										<h3><a href="{{ film.get_film_url }}" class="film-title">{{ film.title }}</a></h3>
+										<span class="">
+											{% for country in film.countries.all %}
+											<a href="{{ country.get_country_url }}"><ins>{{ country.name.capitalize }}</ins></a>
+											{% endfor %}
+										</span>
 										<span class="card__category">
-												{% for category in film.categories.all %}
-													<a href="/">{{ category }}</a>
-												{% endfor %}
-											</span>
+											{% for category in film.categories.all %}
+												<a href="{{ category.get_category_url }}">{{ category }}</a>
+											{% endfor %}
+										</span>
 
 										<div class="card__wrap">
 											<span class="card__rate"><i class="icon ion-ios-star"></i>{{ film.rating }}</span>
@@ -227,10 +233,14 @@
 										</a>
 									</div>
 								</div>
-								<!--  -->
 								<div class="col-12 col-sm-5">
 									<div class="card__content">
 										<h3><a href="{{ film.get_film_url }}" class="film-title">{{ film.title }}</a></h3>
+										<span class="">
+											{% for country in film.countries.all %}
+											<a href="{{ country.get_country_url }}"><ins>{{ country.name.capitalize }}</ins></a>
+											{% endfor %}
+										</span>
 										<span class="card__category">
 												{% for category in film.categories.all %}
 													<a href="/">{{ category }}</a>
@@ -244,7 +254,7 @@
 												{% if film.full_hd %}
 												<li>HD</li>
 												{% endif %}
-												<li>{{ film.constraints }}+</li>
+												<li>{{ film.constraints }}</li>
 											</ul>
 										</div>
 									</div>
