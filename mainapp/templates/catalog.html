@@ -1,4 +1,4 @@
-{% extends 'base.html '%}
+{% extends 'base.html' %}
 {% load static %}
 
 {% block content %}
@@ -27,15 +27,17 @@
 
    <section class="filter">
        <div class="container filter-container">
-		   <form action="catalog/" method="POST">
+		   <form action="/catalog/" method="POST">
+			   {% csrf_token %}
 			   <div class="filter-content">
 			   <button type="submit" value="APPLY FILTER" class="apply-button">APPLY FILTER</button>
 
 				<div class="filter-block">
 					<label for="genre" class="label-for-filter">Genre</label>
 					<select name="genre" id="genre" class="select-filter">
+						<option value="Any">Any</option>
 						{% for category in categories %}
-							<option value="">{{ category }}</option>
+							<option value="{{ category }}">{{ category }}</option>
 						{% endfor %}
 					</select> 
 			   </div>
@@ -43,14 +45,13 @@
 				<div class="filter-block">
 					<label for="country" class="label-for-filter">Country</label>
 					<select name="country" id="country" class="select-filter">
+						<option value="any">Any</option>
 						{% for country in countries %}
-							<option value="">{{ country }}</option>
+							<option value="{{ country }}">{{ country }}</option>
 						{% endfor %}
 					</select>
 				</div>
 			   </div>
-
-			   
 			   			   
 		   </form>
        </div>
@@ -81,9 +82,9 @@
 							<div class="col-12 col-sm-5">
 								<div class="card__content">
 									<h3><a href="{{ film.get_film_url }}" class="film-title">{{ film.title }}</a></h3>
-									<span class="card__category film__country">
+									<span class="">
 										{% for country in film.countries.all %}
-											<a href="{{ country.get_country_url }}">{{ country.name.capitalize }}</a>
+											<a href="{{ country.get_country_url }}"><ins>{{ country.name.capitalize }}</ins></a>
 										{% endfor %}
 									</span>
 									<span class="card__category">
@@ -99,7 +100,7 @@
 											{% if film.full_hd %}
 											<li>HD</li>
 											{% endif %}
-											<li>{{ film.constraints }}+</li>
+											<li>{{ film.constraints }}</li>
 										</ul>
 									</div>
 								</div>

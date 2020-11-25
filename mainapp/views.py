@@ -44,11 +44,24 @@ class CatalogView(View):
 
         return render(request, 'catalog.html', self.prepare_context(filters))
 
+    def post(self, request: WSGIRequest, *args, **kwargs):
+        category = request.POST['genre']
+        country = request.POST['country']
+
+        filters = {
+            'country': country,
+            'category': category
+        }
+
+        context = self.prepare_context(filters)
+        return render(request, 'catalog.html', context)
+
     def prepare_context(self, filters=None):
         categories = Category.objects.all()
         countries = Country.objects.all()
         films = self.prepare_films(filters)
 
+        print(films)
         context = {
             'categories': categories,
             'countries': countries,
@@ -61,10 +74,22 @@ class CatalogView(View):
         country = filters['country']
         category = filters['category']
 
-        if not country and not category:
-            return Film.objects.all()
+        print(country, category)
 
-        films = Film.objects.all().filter()
+        if (not category and not country) \
+                or (category.lower() == 'any' and country.lower() == 'any'):
+            print('all')
+            return Film.objects.all()
+        elif category.lower() == 'any':
+            return Film.objects.all().filter(countries__in=[Country.objects.get(name=country)])
+        elif country.lower() == 'any':
+            return Film.objects.all().filter(categories__in=[Category.objects.get(name=category)])
+
+        co = Country.objects.get(name=country)
+        ca = Category.objects.get(name=category)
+
+        return Film.objects.all().filter(countries__in=[co],
+                                         categories__in=[ca])
 
 
 class HelpView(View):
