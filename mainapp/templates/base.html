@@ -71,12 +71,12 @@
 							<div class="header__auth">
 
 								<!-- header search -->
-								<form action="" method="POST" class="find_film_form">
-									{% csrf_token %}
+								<form action="/film_find" method="GET" class="find_film_form">
 									<div class="search-group">
-										<input type="text" class="">
+										<input type="text" class="" name="film_name">
 										<span class="bar"></span>
-										<button class="header__search-btn" type="button">
+
+										<button class="header__search-btn" type="submit">
 											<i class="icon ion-ios-search"></i>
 										</button>
 									</div>

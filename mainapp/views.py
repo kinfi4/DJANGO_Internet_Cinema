@@ -5,6 +5,7 @@ from django.db.utils import IntegrityError
 
 from .models import Film, Category, Country
 from mainapp.parsing import Parser
+from mainapp.utils.search_algorithm import find_all_similar_films
 
 
 class BaseView(View):
@@ -113,3 +114,14 @@ class FilmCreationView(View):
             print(error)
 
         return HttpResponseRedirect('/film_creation/')
+
+
+class FilmFindView(View):
+    def get(self, request: WSGIRequest, *args, **kwargs):
+        films = find_all_similar_films(request.GET.get('film_name'))
+
+        context = {
+            'search': films,
+            'search_title': request.GET.get('film_name')
+        }
+        return render(request, 'find_film.html', context)
